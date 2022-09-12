@@ -71,7 +71,8 @@ cards.sort(() => 0.5 - Math.random());
 makeGameboard = () => {
     for (let i = 0; i < cardArrayLength; i++) {
         const card = document.createElement('img');
-        card.setAttribute('src', 'images/icecream.jpg');
+        card.classList.add('card-size');
+        card.setAttribute('src', 'images/black.webp');
         card.setAttribute('data-id', i)
         // console.log(card, i)
         console.log(card, i)
@@ -82,11 +83,15 @@ makeGameboard = () => {
 
 makeGameboard();
 
-function flipper() {
+function flipper(e) {
+    e.preventDefault
+    console.log(e.target);
+    e.target.classList.add('card-size')
     let cardId = this.getAttribute('data-id')
     console.log(cards[cardId].name)
     console.log('Im clicked!')
     console.log(cardId)
     cardsChosen.push(cards[cardId].name)
     console.log(cardsChosen)
+    this.setAttribute('src', cards[cardId].img);
 }
