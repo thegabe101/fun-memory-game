@@ -1,4 +1,18 @@
-#gameGrid {
-    display: grid;
-    grid-auto-columns: auto auto auto auto;
+#title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#resultDisplay {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.gameGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
 }
