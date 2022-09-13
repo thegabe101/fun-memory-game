@@ -58,11 +58,13 @@ const cards = [
 ]
 
 console.log(cards);
-
+let currentScore = 0
+const results = document.querySelector("#resultDisplay");
 const cardArrayLength = cards.length;
-
 const grid = document.getElementById('gameGrid');
-const cardsChosen = [];
+let cardsChosen = [];
+let matchedCards = [];
+const winnerCards = []
 
 console.log(grid)
 
@@ -92,6 +94,39 @@ function flipper(e) {
     console.log('Im clicked!')
     console.log(cardId)
     cardsChosen.push(cards[cardId].name)
+    matchedCards.push(cardId);
+    console.log(matchedCards);
     console.log(cardsChosen)
     this.setAttribute('src', cards[cardId].img);
+    if (cardsChosen.length === 2) {
+        setTimeout(checkMatch, 500)
+    }
+}
+
+checkMatch = () => {
+    const matchCards = document.querySelectorAll('img');
+    const optOne = matchedCards[0]
+    const optTwo = matchedCards[1]
+    if (optOne == optTwo) {
+        alert("That's the same card!");
+    }
+    console.log('checkmatch called');
+    if (cardsChosen[0] == cardsChosen[1]) {
+        alert("Nice! That's a match!");
+        results.innerHTML = currentScore++
+        matchCards[matchedCards[0]].setAttribute('src', 'images/match_peq5.png');
+        matchCards[matchedCards[1]].setAttribute('src', 'images/match_peq5.png');
+        matchCards[matchedCards[1]].removeEventListener('click', flipper);
+        winnerCards.push(cardsChosen)
+    } else {
+        matchCards[optOne].setAttribute('src', 'images/black.webp');
+        matchCards[optTwo].setAttribute('src', 'images/black.webp');
+        alert("Try again!")
+    }
+    cardsChosen = []
+    matchedCards = []
+
+    if ((winnerCards.length - 1) == cards.length / 2) {
+        results.innerhtml = "Congratulations! You won!"
+    }
 }
